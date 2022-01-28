@@ -1,7 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, flash
-import psycopg2
-import os
-
+from flask_login import LoginManager
+from test import usersetup
 from config import SECRET_KEY
 
 ENV = 'dev'
@@ -9,12 +8,8 @@ ENV = 'dev'
 app = Flask(__name__)
 
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
-if ENV == 'dev':
-    app.debug = True
-    DATABASE_URL = ''
-else:
-    DATABASE_URL = os.environ['DATABASE_URL']
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 app.config["SECRET_KEY"] = SECRET_KEY
 
@@ -69,8 +64,8 @@ def login():
             return render_template("login.html")
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?",
-                          request.form.get("username"))
+        user = usersetup(request.form.get("username"),
+                         request.form.get("password"))
 
         # Ensure username exists and password is correct
         """if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):

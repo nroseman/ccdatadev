@@ -1,7 +1,12 @@
 from flask_login import UserMixin
-from flask_login import login_manager
+from flask import request
 from werkzeug.security import check_password_hash, generate_password_hash
-from test import login_manager, cur
+import psycopg2
+from config import DATABASE_URL
+from test import login_manager
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+cur = conn.cursor()
 
 
 class User(UserMixin):
@@ -11,8 +16,9 @@ class User(UserMixin):
 
     def get_id(username):
         cur.execute("SELECT * FROM users WHERE username = %s",
-                    request.form.get("username"))
-        user_id = cursor.fetchone()
+                    (request.form.get("username"),))
+        user_id = cur.fetchone()
+        user_id = user_id[0]
         if user_id:
             return user_id
 
@@ -30,4 +36,4 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    return User.get_id(user_id)
