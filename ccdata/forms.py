@@ -1,10 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, DecimalField, SubmitField, PasswordField
-from wtforms.validators import Length
+from wtforms.validators import Length, InputRequired
 
 
 class Cakeform(FlaskForm):
-    extraattr = {"step": .25}
     flour_brand = StringField(
         "Brand", validators=[Length(max=20)])
     flour_amount = DecimalField("Amount", places=2)
@@ -16,3 +15,9 @@ class Cakeform(FlaskForm):
     """def validate_field(self, field):
         if True:
             raise ValidationError('validation message')"""
+
+
+class LoginForm(FlaskForm):
+    username = StringField("Username", validators=[Length(max=20)])
+    password = PasswordField("Password", validators=[InputRequired()])
+    submit = SubmitField("Login")

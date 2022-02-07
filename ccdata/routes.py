@@ -1,7 +1,6 @@
 from ccdata import app
-from flask import render_template, redirect, request, flash, session
-from ccdata.forms import Cakeform
-from ccdata.users import User
+from flask import render_template, redirect, flash, session
+from ccdata.forms import Cakeform, LoginForm
 import os
 import psycopg2
 from werkzeug.security import check_password_hash
@@ -47,6 +46,7 @@ def cakedata():
             conn.close()
         else:
             flash("but not added to database. Try again")
+            return render_template("cakedata.html", form=form)
 
         return redirect("/cakedata")
 
@@ -68,37 +68,42 @@ def login():
     """Log user in"""
 
     # Forget any user_id
-    session.clear()
+    # session.clear() - clears flash message, so gotta see what to do with that
 
-    # User reached route via POST (as by submitting a form via POST)
-    if request.method == "POST":
+    form = LoginForm()
+    print(form)
+    if form.validate_on_submit():
+        flash(f"Form Submitted")
+        print(form.errors)
+        return redirect("/login")
 
-        # Ensure username was submitted
-        if not request.form.get("username"):
-            flash("Enter Username", "warning")
-            return render_template("login.html")
+    return render_template("login.html", form=form)
 
-        # Ensure password was submitted
-        elif not request.form.get("password"):
-            flash("Enter Password", "warning")
-            return render_template("login.html")
-
-        # Query database for username
-        """"user = User(request.form.get("username"),
-                    request.form.get("password"))
-        flash(f"{user.get_id()}")"""
-
-        # Ensure username exists and password is correct
-        """if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            flash("Enter Valid Username/Password", "warning")
-            return render_template("login.html")"""
-
-        # Remember which user has logged in
-        """session["user_id"] = rows[0]["id"]"""
-
-        # Redirect user to home page
-        return redirect("/cakedata")
-
-    # User reached route via GET (as by clicking a link or via redirect)
-    else:
+    # Below is a pre-wtforms artifact. Keeping just in case for now.
+    """
+    # Ensure username was submitted
+    if not request.form.get("username"):
+        flash("Enter Username", "warning")
         return render_template("login.html")
+
+    # Ensure password was submitted
+    elif not request.form.get("password"):
+        flash("Enter Password", "warning")
+        return render_template("login.html")
+    """
+
+    # This might be useful if users when users are established
+    """
+    # Query database for username
+        user = User(request.form.get("username"),
+                    request.form.get("password"))
+        flash(f"{user.get_id()}")
+
+    # Ensure username exists and password is correct
+    if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        flash("Enter Valid Username/Password", "warning")
+        return render_template("login.html")
+
+    # Remember which user has logged in
+    session["user_id"] = rows[0]["id"]
+    """

@@ -3,7 +3,7 @@
 {% block title %}Cake Data{% endblock title %}
 
 {% block main %}
-<div class="cakeformdiv">
+<div class="cake form">
     <form action="/cakedata" method="post">
         {{ form.hidden_tag() }}
         <fieldset>
@@ -15,7 +15,6 @@
             <div class="form-group">
                 {{ form.flour_amount.label(class="form-group-label") }}
                 {{ form.flour_amount(class="form-control", autocomplete="off") }}
-                <!-- {{ form.flour_measure.label(class="form-group-label") }} -->
                 {{ form.flour_measure(class="form-control") }}
             </div>
         </fieldset>

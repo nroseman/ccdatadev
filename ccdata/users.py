@@ -1,3 +1,5 @@
+# Unused module for now. Once complete, can remove password from input forms.
+"""
 from flask import request
 import psycopg2
 import os
@@ -21,3 +23,4 @@ class User():
         user_id = cur.fetchone()[0]
         cur.close()
         return user_id
+"""

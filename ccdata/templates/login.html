@@ -6,16 +6,24 @@
 <div class="wip">
     <img src="{{ url_for('static', filename='wip.png') }}" alt="Work in Progress">
 </div>
-<form action="/login" method="post">
-    <div class="logininput">
-        <input type="text" autocomplete="off" required id="username" name="username" placeholder="Username">
-    </div>
-    <div class="logininput">
-        <input type="password" autocomplete="off" required id="password" name="password" placeholder="Password">
-    </div>
-    <div class="submitbutton">
-        <input type="submit" value="Login">
-    </div>
 
-</form>
+<div class="login form">
+    <form action="/login" method="post">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <legend>Login</legend>
+            <div class="form-group">
+                {{ form.username.label(class="form-group-label") }}
+                {{ form.username(class="form-control", autocomplete="off") }}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="form-group-label") }}
+                {{ form.password(class="form-control", autocomplete="off") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn") }}
+            </div>
+        </fieldset>
+    </form>
+</div>
 {% endblock main %}
