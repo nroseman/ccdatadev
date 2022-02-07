@@ -1,7 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, flash
 from flask_login import LoginManager
 from test import usersetup
-from config import SECRET_KEY
 
 ENV = 'dev'
 
@@ -10,8 +9,6 @@ app = Flask(__name__)
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-app.config["SECRET_KEY"] = SECRET_KEY
 
 
 @app.after_request
