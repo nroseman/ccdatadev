@@ -25,7 +25,7 @@ def cakedata():
 
     form = Cakeform()
     if form.validate_on_submit():
-        flash(f"Recipe valid...")
+        flash("Recipe valid...", "info")
         conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
         cur = conn.cursor()
         cur.execute("SELECT hash FROM users")
@@ -33,7 +33,7 @@ def cakedata():
         cur.close()
         conn.close()
         if check_password_hash(valid_hash, form.pw.data):
-            flash("and added to database")
+            flash("and added to database", "info")
             data = (form.flour_brand.data, float(form.flour_amount.data),
                     form.flour_measure.data)
             conn = psycopg2.connect(
@@ -45,7 +45,7 @@ def cakedata():
             cur.close()
             conn.close()
         else:
-            flash("but not added to database. Try again")
+            flash("but not added to database. Try again", "error")
             return render_template("cakedata.html", form=form)
 
         return redirect("/cakedata")
@@ -73,8 +73,7 @@ def login():
     form = LoginForm()
     print(form)
     if form.validate_on_submit():
-        flash(f"Form Submitted")
-        print(form.errors)
+        flash("Form Submitted", "info")
         return redirect("/login")
 
     return render_template("login.html", form=form)

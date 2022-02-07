@@ -32,11 +32,11 @@
 
     </header>
     <main>
-        {% if get_flashed_messages() %}
-        <div class="alert alert-primary mb-0 text-center" role="alert">
-            {{ get_flashed_messages() | join(" ") }}
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+        <div class="alert-{{ category }}" role="alert">
+            {{ message }}
         </div>
-        {% endif %}
+        {% endfor %}
         {% block main %}{% endblock main %}
     </main>
 </body>
