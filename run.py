@@ -1,5 +1,3 @@
-
-
 from distutils.log import debug
 from ccdata import app
 
