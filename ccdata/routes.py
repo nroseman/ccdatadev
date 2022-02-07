@@ -27,24 +27,26 @@ def cakedata():
     form = Cakeform()
     if form.validate_on_submit():
         flash(f"Recipe valid...")
-        # conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-        # cur = conn.cursor()
-        # cur.execute("SELECT hash FROM users")
-        # valid_hash = cur.fetchone()[0]
-        # cur.close()
-        # conn.close()
-        # if check_password_hash(valid_hash, form.pw.data):
-        #     flash("and added to database")
-        #     data = (form.flour_brand.data, float(form.flour_amount.data),
-        #             form.flour_measure.data)
-        #     conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
-        #     cur = conn.cursor()
-        #     cur.execute("INSERT INTO cakerecipes (flour_brand, flour_amount, flour_measure) VALUES (%s, %s, %s)", data)
-        #     conn.commit()
-        #     cur.close()
-        #     conn.close()
-        # else:
-        #     flash("but not added to database. Try again")
+        conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+        cur = conn.cursor()
+        cur.execute("SELECT hash FROM users")
+        valid_hash = cur.fetchone()[0]
+        cur.close()
+        conn.close()
+        if check_password_hash(valid_hash, form.pw.data):
+            flash("and added to database")
+            data = (form.flour_brand.data, float(form.flour_amount.data),
+                    form.flour_measure.data)
+            conn = psycopg2.connect(
+                os.environ['DATABASE_URL'], sslmode='require')
+            cur = conn.cursor()
+            cur.execute(
+                "INSERT INTO cakerecipes (flour_brand, flour_amount, flour_measure) VALUES (%s, %s, %s)", data)
+            conn.commit()
+            cur.close()
+            conn.close()
+        else:
+            flash("but not added to database. Try again")
 
         return redirect("/cakedata")
 
