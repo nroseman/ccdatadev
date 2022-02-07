@@ -1,0 +1,134 @@
+:root {
+    --color-1: #3c240d;
+    --color-2: #624a2d;
+    --color-3: #8d7053;
+    --color-4: #c8bcb1;
+    --color-5: #e4dacf;
+}
+
+body {
+    background-color: var(--color-4);
+}
+
+/* Navbar Styling*/
+
+.mainnav {
+    position: relative;
+    background-color: var(--color-2);
+    overflow: hidden;
+    min-height: 93px;
+}
+
+.mainnav a {
+    float: left;
+    color: var(--color-4);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 21px;
+}
+
+/* Change the color of links on hover */
+.mainnav a:hover {
+    background-color: var(--color-5);
+    color: var(--color-3);
+}
+
+/* Add a color to the active/current link */
+.mainnav a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+/* Centered section inside the top navigation */
+.mainnav-centered a {
+    float: none;
+    position: absolute;
+    margin-top: 3px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#brandlogo {
+    max-width: 90px;
+    margin-top: 1.5px;
+}
+
+/* Right-aligned section inside the top navigation */
+.mainnav-right {
+    float: right;
+}
+
+/* End Navbar Styling */
+
+.wip {
+    display: block;
+    margin: auto;
+    max-width: 300px;
+
+}
+
+/* Cake Data Styling */
+.cakeformdiv {
+    max-width: 450px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.cakeformdiv legend {
+    color: var(--color-1);
+    border-top: 1px solid var(--color-1);
+    border-left: 1px solid var(--color-1);
+    border-right: 1px solid var(--color-1);
+    border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    background: var(--color-5);
+    padding: 0px 8px 3px 8px;
+    box-shadow: -0px -1px 2px var(--color-4);
+    -moz-box-shadow: -0px -1px 2px var(--color-4);
+    -webkit-box-shadow: -0px -1px 2px var(--color-4);
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.cakeformdiv fieldset {
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    margin: 0px 0px 10px 0px;
+    border: 1px solid var(--color-1);
+    padding: 20px;
+    background: var(--color-5);
+    box-shadow: inset 0px 0px 15px var(--color-4);
+    -moz-box-shadow: inset 0px 0px 15px var(--color-4);
+    -webkit-box-shadow: inset 0px 0px 15px var(--color-4);
+}
+
+.cakeformdiv label {
+    margin-bottom: 10px;
+}
+
+.cakeformdiv input[type=text],
+.cakeformdiv input[type=data],
+.cakeformdiv input[type=password],
+.cakeformdiv input[type=number],
+.cakeformdiv select {
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border: 1px solid #FFC2DC;
+    outline: none;
+    color: var(--color-1);
+    padding: 5px 8px 5px 8px;
+    box-shadow: inset 1px 1px 4px var(--color-4);
+    -moz-box-shadow: inset 1px 1px 4px var(--color-4);
+    -webkit-box-shadow: inset 1px 1px 4px var(--color-4);
+    background: #FFEFF6;
+    width: 50%;
+}
+
+.cakeformdiv select {
+    max-width: 100px;
+}
