@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}Cake Data{% endblock title %}
+
+{% block main %}
+<div class="cakeformdiv">
+    <form action="/cakedata" method="post">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <legend>Flour</legend>
+            <div class="form-group">
+                {{ form.flour_brand.label(class="form-group-label") }}
+                {{ form.flour_brand(class="form-control", autocomplete="off") }}
+            </div>
+            <div class="form-group">
+                {{ form.flour_amount.label(class="form-group-label") }}
+                {{ form.flour_amount(class="form-control", autocomplete="off") }}
+                <!-- {{ form.flour_measure.label(class="form-group-label") }} -->
+                {{ form.flour_measure(class="form-control") }}
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="form-group">
+                {{ form.pw.label(class="form-group-label") }}
+                {{ form.pw(class="form-group-label") }}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn") }}
+        </div>
+    </form>
+</div>
+{% endblock main %}
