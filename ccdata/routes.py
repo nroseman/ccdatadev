@@ -6,6 +6,8 @@ import os
 import psycopg2
 from werkzeug.security import check_password_hash
 
+app = Flask(__name__)
+app.config["SECRET_KEY"] = os.environ['SECRET_KEY']
 
 @app.after_request
 def after_request(response):
